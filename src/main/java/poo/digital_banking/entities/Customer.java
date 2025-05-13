@@ -14,6 +14,7 @@ import java.util.List;
 
 @Entity @AllArgsConstructor @NoArgsConstructor @Builder
 @Data
+
 public class Customer {
     @Id
     private String id;

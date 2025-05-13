@@ -20,7 +20,7 @@ public class DigitalBankingApplication {
 
 		SpringApplication.run(DigitalBankingApplication.class, args);
 	}
-	@Bean
+	//@Bean
 	CommandLineRunner commandLineRunner(BankService bankService) {
 		return args -> {
 			Stream.of("Hassan", "Yassine", "Aicha").forEach(name -> {
