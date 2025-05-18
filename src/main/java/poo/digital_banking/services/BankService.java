@@ -10,7 +10,7 @@ import java.util.List;
 public interface BankService {
     CustomerDTO saveCustomer(CustomerDTO customerDTO);
     CustomerDTO updateCustomer(CustomerDTO customerDTO);
-    void deleteCustomer(String customerId);
+    void deleteCustomer(String customerId)throws CustomerNotFoundException;
     CustomerDTO getCustomer(String customerId) throws CustomerNotFoundException;
     List<CustomerDTO> listCustomers();
     List<CustomerDTO> searchCustomers(String keyword);

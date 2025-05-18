@@ -50,8 +50,6 @@ public class CustomerRestController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteCustomer(@PathVariable String id) {
         try {
-            // Check if customer exists
-            bankService.getCustomer(id);
             bankService.deleteCustomer(id);
             return ResponseEntity.noContent().build();
         } catch (CustomerNotFoundException e) {

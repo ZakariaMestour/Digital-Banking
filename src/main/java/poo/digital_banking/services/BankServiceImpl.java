@@ -18,6 +18,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -48,8 +49,31 @@ public class BankServiceImpl implements BankService {
     }
 
     @Override
-    public void deleteCustomer(String customerId) {
-        customerRepository.deleteById(customerId);
+    public void deleteCustomer(String customerId)throws CustomerNotFoundException {
+        Customer customer = customerRepository.findById(customerId)
+                .orElseThrow(() -> new CustomerNotFoundException("Customer not found"));
+
+        // Handle all relationships properly
+        List<BankAccount> accounts = new ArrayList<>(customer.getBankAccounts());
+
+        for (BankAccount account : accounts) {
+            // Clear operations from each bank account if necessary
+            if (account.getOperations() != null) {
+                account.getOperations().clear();
+            }
+
+            // Remove the reference from BankAccount to Customer
+            account.setCustomer(null);
+        }
+
+        // Clear the bank accounts collection from customer
+        customer.getBankAccounts().clear();
+
+        // Save changes to maintain consistency
+        customerRepository.saveAndFlush(customer);
+
+        // Now delete the customer
+        customerRepository.delete(customer);
     }
 
     @Override

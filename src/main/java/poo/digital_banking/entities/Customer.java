@@ -2,7 +2,7 @@ package poo.digital_banking.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,6 +20,6 @@ public class Customer {
     private String id;
     private String name;
     private String email;
-    @OneToMany(mappedBy = "customer",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "customer",fetch = FetchType.EAGER,cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BankAccount> bankAccounts=new ArrayList<>();
 }
