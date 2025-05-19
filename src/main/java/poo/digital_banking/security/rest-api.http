@@ -1,0 +1,14 @@
+### GET request to example server
+GET http://localhost:8081/customers
+accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODEiLCJzdWIiOiJ1c2VyMSIsImV4cCI6MTc0NzYyMzA2NywiaWF0IjoxNzQ3NjIyNDY3LCJzY29wZSI6IlJPTEVfVVNFUiJ9.cgam8RbZBlxKc38YaKJknPXEf8LfWrqqG_SeaoUz9rcHaM4TQR-pS35W6PrF-LrOYyoWS54JhWHXvNnOOMTh7Q
+###
+GET http://localhost:8081/auth/profile
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODUiLCJzdWIiOiJ1c2VyMSIsImV4cCI6MTc0NjMwMDI1NywiaWF0IjoxNzQ2Mjk5NjU3LCJzY29wZSI6IlJPTEVfVVNFUiJ9.qCnJLV-AdnIsIO4vNjGMaAOIyQDwUN7xln2aqBGVxvES4Cl0xgPS0r-Xi2-hy2bveGSB3sSu2Gg1nu2pZPd2YA
+accept: application/json
+
+###
+POST http://localhost:8081/auth/login
+Content-type: application/x-www-form-urlencoded
+
+username=user1&password=1234

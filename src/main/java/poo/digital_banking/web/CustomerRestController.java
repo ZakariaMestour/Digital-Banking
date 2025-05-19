@@ -1,7 +1,10 @@
 package poo.digital_banking.web;
 
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import poo.digital_banking.dtos.BankAccountDTO;
 import poo.digital_banking.dtos.CustomerDTO;
@@ -12,12 +15,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/customers")
-@RequiredArgsConstructor
+@AllArgsConstructor
+@Slf4j
 @CrossOrigin("*")
 public class CustomerRestController {
     private final BankService bankService;
 
     @GetMapping
+
     public List<CustomerDTO> customers() {
         return bankService.listCustomers();
     }
@@ -48,6 +53,7 @@ public class CustomerRestController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN', 'MANAGER')")
     public ResponseEntity<?> deleteCustomer(@PathVariable String id) {
         try {
             bankService.deleteCustomer(id);
